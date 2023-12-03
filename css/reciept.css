@@ -1,0 +1,61 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    border-radius: 50%;
+    background-color: #FFF;
+}
+
+h1 {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+}
+
+h2 {
+    font-size: 18px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    font-size: 16px;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+p {
+    font-size: 16px;
+    text-align: center;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+}
+
+#okButton {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+#okButton:hover {
+    background-color: #45a049;
+}
+
+#cartTotal {
+    font-weight: bold;
+    color: #FF5733;
+    font-size: 20px;
+    text-align: center;
+}
