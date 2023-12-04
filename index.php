@@ -40,7 +40,7 @@ else{
                 <a href="#">Proucts</a>
             </li>
             <li>
-                <a href="#">Locations</a>
+                <a href="orders.php">Orders</a>
             </li>
             <li>
                 <a href="#">About</a>
@@ -169,7 +169,7 @@ else{
             <img src="images/p-8.jpg" alt="Product 3">
             <h3>Chelsea Boots</h3>
             <p>Price: $29.99</p>
-            <button onclick="addToCart('Chelsea Boots', 19.99)">Add to Cart</button>
+            <button onclick="addToCart('Chelsea Boots', 29.99)">Add to Cart</button>
         </div>
 
     </section>

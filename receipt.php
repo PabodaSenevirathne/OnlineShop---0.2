@@ -1,33 +1,46 @@
-<?php
-session_start();
+<!-- <?php
+//require 'connection.php';
+//if(isset($_SESSION["id"])){
+ // $id = $_SESSION["id"];
+  //$order = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM orders WHERE id = $id"));
+//}
+//else{
+ // header("Location: login.php");
+//}
+?> -->
 
-// Check whether the form data is present in the session
-if (!isset($_SESSION['formData'])) {
-    // Redirect to the form page if data is not available
-    header("Location: form.php");
+<?php
+require 'connection.php';
+
+// Start or resume the session
+// session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION['id'])) {
+    // If not logged in, redirect to login page
+    header("Location: login.php");
     exit();
 }
 
-// Access form data from the session
-$formData = $_SESSION['formData'];
+// Retrieve the user ID from the session
+$userID = $_SESSION['id'];
 
-// Access cart details from the session
-$cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
+// Fetch the order details associated with the user
+$query = "SELECT * FROM orders WHERE userId = $userID";
+$result = mysqli_query($conn, $query);
 
-unset($_SESSION['formData']);
-
-// Calculate the total amount
-$total = 0;
-foreach ($cart as $product) {
-    $total += ($product['quantity'] * $product['price']);
-}
-
-// Check whether the total amount is $10 or more
-if ($total < 10) {
-    echo "Error: Minimum purchase should be $10 or more.";
+if ($result && mysqli_num_rows($result) > 0) {
+    $order = mysqli_fetch_assoc($result);
+} else {
+    // No order found for the user
+    // You can redirect or handle this case as per your requirement
+    header("Location: login.php");
     exit();
 }
 ?>
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,10 +56,10 @@ if ($total < 10) {
 <body>
     <!-- user details -->
     <h2>Receipt</h2>
-    <p>Name: <?php echo $formData['name']; ?></p>
-    <p>Phone: <?php echo $formData['phone']; ?></p>
-    <p>Postcode: <?php echo $formData['postcode']; ?></p>
-    <p>Address: <?php echo $formData['address']; ?></p>
+    <p>Name: <?php echo $order['name']; ?></p>
+    <p>Phone: <?php echo $order['phone']; ?></p>
+    <p>Postcode: <?php echo $order['postcode']; ?></p>
+    <p>Address: <?php echo $order['address']; ?></p>
     <p>City: <?php echo $formData['city']; ?></p>
     <p>Province: <?php echo $formData['province']; ?></p>
     <p>Email: <?php echo $formData['email']; ?></p>

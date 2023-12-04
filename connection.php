@@ -11,6 +11,9 @@ if(isset($_POST["action"])){
     else if($_POST["action"] == "login"){
       login();
     }
+    else if($_POST["action"] == "checkout"){
+        saveData();
+      }
   }
   
   // REGISTER
@@ -20,8 +23,9 @@ if(isset($_POST["action"])){
     $name = $_POST["name"];
     $username = $_POST["username"];
     $password = $_POST["password"];
+    $role = $_POST["role"];
   
-    if(empty($name) || empty($username) || empty($password)){
+    if(empty($name) || empty($username) || empty($password)|| empty($role)){
       echo "Please Fill Out The Form!";
       exit;
     }
@@ -32,7 +36,7 @@ if(isset($_POST["action"])){
       exit;
     }
   
-    $query = "INSERT INTO user VALUES('', '$name', '$username', '$password')";
+    $query = "INSERT INTO user VALUES('', '$name', '$username', '$password', '$role')";
     mysqli_query($conn, $query);
     echo "Registration Successful";
   }
@@ -54,6 +58,7 @@ if(isset($_POST["action"])){
         echo "Login Successful";
         $_SESSION["login"] = true;
         $_SESSION["id"] = $row["id"];
+        $_SESSION["role"] = $row["role"];
       }
       else{
         echo "Wrong Password";
@@ -64,6 +69,26 @@ if(isset($_POST["action"])){
       echo "User Not Registered";
       exit;
     }
+  }
+
+   // Save checkoutData
+   function saveData(){
+    global $conn;
+  
+    $userId = $_POST["userId"];
+    $name = $_POST["name"];
+    $phone = $_POST["phone"];
+    $postcode = $_POST["postcode"];
+    $address = $_POST["address"];
+  
+    if(empty($name) || empty($phone) || empty($postcode) || empty($address)){
+      echo "Please Fill Out The Form!";
+      exit;
+    }
+  
+    $query = "INSERT INTO orders VALUES('','$userId', '$name', '$phone', '$postcode', '$address')";
+    mysqli_query($conn, $query);
+    echo "Data Save Successful";
   }
 
 ?>

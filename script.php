@@ -7,6 +7,7 @@
         name: $("#name").val(),
         username: $("#username").val(),
         password: $("#password").val(),
+        role: $('#role').val(),
         action: $("#action").val(),
       };
 
@@ -17,6 +18,33 @@
         success:function(response){
           alert(response);
           if(response == "Login Successful"){
+            window.location.reload();
+          }
+        }
+      });
+    });
+  }
+
+
+  function saveFormData(){
+    $(document).ready(function(){
+      var userId = <?php echo isset($_SESSION["id"]) ? $_SESSION["id"] : 'null'; ?>;
+      var data = {
+        userId: userId,
+        name: $("#name").val(),
+        phone: $("#phone").val(),
+        postcode: $("#postcode").val(),
+        address: $('#address').val(),
+        action: $("#action").val(),
+      };
+
+      $.ajax({
+        url: 'connection.php',
+        type: 'post',
+        data: data,
+        success:function(response){
+          alert(response);
+          if(response == "Checkout Successful"){
             window.location.reload();
           }
         }
