@@ -39,6 +39,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                 <tr>
                     <th>Order ID</th>
                     <th>Customer</th>
+                    <th>Phone</th>
                     <th>Products</th>
                     <th>Total</th>
                 </tr>
@@ -48,7 +49,8 @@ if ($result && mysqli_num_rows($result) > 0) {
                     <tr>
                         <td><?php echo $order['id']; ?></td>
                         <td><?php echo $order['name']; ?></td>
-                        <td><?php echo $order['products']; ?></td>
+                        <td><?php echo $order['phone']; ?></td>
+                        <td><?php echo $order['product1Qty']; ?></td>
                         <td><?php echo $order['total_amount']; ?></td>
                         <!-- Add more details as necessary -->
                     </tr>

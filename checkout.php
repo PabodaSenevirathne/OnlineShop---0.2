@@ -1,3 +1,8 @@
+<?php
+require 'connection.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +25,7 @@
             <p>Your One-Stop Shop for Quality Products</p>
         </div>
         <script>
-    </script>
+        </script>
 
     </header>
 
@@ -71,10 +76,27 @@
             </li>
         </ul>
     </nav>
-    <?php include 'php/form.php'; ?>
     <h2>Checkout Details</h2>
     <form method="post" action="">
-    <input type="hidden" id="action" value="checkout">
+        <input type="hidden" id="action" value="checkout">
+        
+        <h2>Product Details</h2><br>
+
+        <label for="Pen holder">Sneakers - $8.99 each:</label>
+        <p>Quantity: <input type="number" id="product1Qty" name ="product1Qty" value="0"></p></br>
+        <br>
+
+        <label for="Mittens">Elements - $29.99 each:</label>
+        <p>Quantity: <input type="number" id="product2Qty" name ="product2Qty" value="0"></p></br>
+        <br>
+        
+        <label for="Door mat">Aldo - $19.99 each:</label>
+        <p>Quantity: <input type="number" id="product3Qty" name ="product3Qty" value="0"></p></br>
+        <br>
+       
+
+        <h2>Customer Details</h2><br>
+
         <label for="name">Name:</label>
         <input type="text" id="name" name="name"></br>
         <br><br>

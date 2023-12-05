@@ -31,11 +31,25 @@
       var userId = <?php echo isset($_SESSION["id"]) ? $_SESSION["id"] : 'null'; ?>;
       var data = {
         userId: userId,
+        product1Qty: $("#product1Qty").val(),
+        product2Qty: $("#product2Qty").val(),
+        product3Qty: $("#product3Qty").val(),
         name: $("#name").val(),
         phone: $("#phone").val(),
         postcode: $("#postcode").val(),
         address: $('#address').val(),
+        city: $('#city').val(),
+        province: $('#province').val(),
+        email: $('#email').val(),
+        cname: $('#cname').val(),
+        ccnum: $('#ccnum').val(),
+        expmonth: $('#expmonth').val(),
+        expyear: $('#expyear').val(),
+        cvv: $('#cvv').val(),
+        password: $('#password').val(),
+        confirmPassword: $('#confirmPassword').val(),
         action: $("#action").val(),
+  
       };
 
       $.ajax({
