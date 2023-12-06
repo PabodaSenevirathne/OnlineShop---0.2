@@ -18,6 +18,7 @@ var_dump($_SESSION);
 
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,6 +30,68 @@ var_dump($_SESSION);
 </head>
 
 <body>
+<header>
+        <div class="logo">
+            <img src="images/logo2.svg" alt="Your Logo" width="100" height="100">
+        </div>
+        <div class="title">
+            <h1>Welcome to Our Online Store</h1>
+            <p>Your One-Stop Shop for Quality Products</p>
+        </div>
+        <script>
+        </script>
+
+    </header>
+
+    <nav>
+        <ul>
+            <li>
+                <a href="index.php">Home</a>
+            </li>
+            <li>
+                <a href="#">Products</a>
+            </li>
+            <li>
+                <a href="#">Locations</a>
+            </li>
+            <li>
+                <a href="#">Packages</a>
+            </li>
+            <li>
+                <a href="#">Training</a>
+            </li>
+            <li>
+                <a href="#">About</a>
+                <ul class="sub_menu">
+                    <li>
+                        <a href="#">Mission</a>
+                        <ul class="sub_sub_menu">
+                            <li>
+                                <a href="#">Mission</a>
+                            </li>
+                            <li>
+                                <a href="#">Vision</a>
+                            </li>
+                            <li>
+                                <a href="#">Team</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Vision</a>
+                    </li>
+                    <li>
+                        <a href="#">Team</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="shopping-cart.php">Cart</a>
+            </li>
+        </ul>
+    </nav>
+
+
     <h2>Create Shop Manager</h2>
     <?php if (isset($message)) : ?>
         <p style="color: green;"><?php echo $message; ?></p>
@@ -38,7 +101,6 @@ var_dump($_SESSION);
     <?php endif; ?>
     <?php if ($showCreateForm): ?>
     <form autocomplete="off" action="" method="post">
-        <input type="hidden" id="action" value="register">
         <input type="hidden" id="action" value="register">
         <label for="">Name</label>
         <input type="text" id="name" value=""> <br>

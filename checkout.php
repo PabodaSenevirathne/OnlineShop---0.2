@@ -1,6 +1,13 @@
 <?php
 require 'connection.php';
 
+// Check if the user is not logged in
+if (!isset($_SESSION['id'])) {
+    // Redirect to the login page
+    header("Location: login.php");
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -13,6 +20,93 @@ require 'connection.php';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <title>PBerlino</title>
+
+    <script>
+   
+
+//    function openPopupWindow() {
+//     console.log("Button clicked");
+
+//     // Create a relative URL
+//     const baseUrl = window.location.href.split('/').slice(0, -1).join('/');
+//     const relativeUrl = 'receipt.php';
+//     const apiUrl = `${baseUrl}/${relativeUrl}`;
+
+//     // Open a new popup and navigate to the receipt page
+//     const popup = window.open(apiUrl, '_blank', 'width=800,height=600');
+
+//     // Check if the popup was successfully opened
+//     if (popup) {
+//         console.log("Popup opened successfully");
+//     } else {
+//         console.error("Error opening popup");
+//     }
+// }
+
+// function openPopupWindow() {
+//     console.log("Button clicked");
+
+//     // Create a relative URL
+//     const baseUrl = window.location.href.split('/').slice(0, -1).join('/');
+//     const apiUrl = `${baseUrl}/receipt.php`;
+
+//     // Create an iframe
+//     const iframe = document.createElement('iframe');
+//     iframe.style.width = '600px';
+//     iframe.style.height = '400px';
+
+//     // Set the source of the iframe to the receipt API
+//     iframe.src = apiUrl;
+
+//     // Open a new popup and append the iframe to it
+//     const popup = window.open('', '_blank', 'width=600,height=400');
+//     popup.document.body.appendChild(iframe);
+// }
+
+function openPopupWindow() {
+    console.log("Button clicked");
+
+    // Create a relative URL
+    const baseUrl = window.location.href.split('/').slice(0, -1).join('/');
+    const apiUrl = `${baseUrl}/receipt.php`;
+
+    // Send a fetch request to fetch receipt content
+    fetch(apiUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status} - ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Response received:", data);
+
+            // Create an iframe
+            const iframe = document.createElement('iframe');
+            iframe.style.width = '600px';
+            iframe.style.height = '400px';
+
+            // Set the content of the iframe
+            iframe.contentDocument.write(data.receiptContent);
+
+            // Open a new popup and append the iframe to it
+            const popup = window.open('', '_blank', 'width=600,height=400');
+            popup.document.body.appendChild(iframe);
+        })
+        .catch(error => {
+            console.error("Error fetching receipt:", error);
+        });
+}
+
+
+
+
+
+
+
+
+
+    </script>
 </head>
 
 <body>

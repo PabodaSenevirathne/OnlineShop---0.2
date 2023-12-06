@@ -75,6 +75,7 @@ function saveData()
   global $conn;
 
   $userId = $_POST["userId"];
+  $sessionId = session_id();  // Retrieve the current session ID
   //Retrieve form data
   $product1Qty = $_POST['product1Qty'];
   $product2Qty = $_POST['product2Qty'];
@@ -99,7 +100,33 @@ function saveData()
     exit;
   }
 
-  $query = "INSERT INTO orders VALUES('','$userId','$product1Qty','$product2Qty','$product3Qty','$name', '$phone', '$postcode', '$address','$city','$province','$email','$cname','$ccnum','$expmonth','$expyear', '$cvv','$password','$confirmPassword')";
+
+
+
+  $product1Price = 10;  // Replace with the actual price for product 1
+  $product2Price = 15;  // Replace with the actual price for product 2
+  $product3Price = 20;  // Replace with the actual price for product 3
+
+  // Calculate subtotals for each product
+  $subtotal1 = $product1Qty * $product1Price;
+  $subtotal2 = $product2Qty * $product2Price;
+  $subtotal3 = $product3Qty * $product3Price;
+
+  // Calculate total without tax
+  $totalWithoutTax = $subtotal1 + $subtotal2 + $subtotal3;
+
+
+  // Retrieve province from the form data
+  $province = $_POST["province"];
+
+  // Calculate sales tax based on the province
+  $taxRate = getSalesTaxRate($province);
+  $salesTax = $totalWithoutTax * $taxRate;
+
+  // Calculate the final total with tax
+  $total = $totalWithoutTax + $salesTax;
+
+  $query = "INSERT INTO orders VALUES('','$userId','$sessionId','$product1Qty','$product2Qty','$product3Qty','$name', '$phone', '$postcode', '$address','$city','$province','$email','$cname','$ccnum','$expmonth','$expyear', '$cvv','$password','$confirmPassword', '$total','$salesTax')";
 
   if (mysqli_query($conn, $query)) {
     echo "Data Save Successful";
@@ -108,5 +135,27 @@ function saveData()
   }
 
   // Close the database connection
- // mysqli_close($conn);
+  // mysqli_close($conn);
+}
+
+
+
+
+function getSalesTaxRate($province)
+{
+  // Tax rates for each province
+  $taxRates = [
+    'Alberta' => 0.05,
+    'British Columbia' => 0.07,
+    'Manitoba' => 0.08,
+    'New Brunswick' => 0.10,
+    'Newfoundland and Labrador' => 0.08,
+    'Nova Scotia' => 0.10,
+    'Ontario' => 0.13,
+    'Prince Edward Island' => 0.09,
+    'Quebec' => 0.09975,
+    'Saskatchewan' => 0.06
+  ];
+
+  return isset($taxRates[$province]) ? $taxRates[$province] : 0;
 }

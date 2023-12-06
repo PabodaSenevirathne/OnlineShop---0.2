@@ -30,6 +30,13 @@ else{
             <h1>Welcome to Our Online Store</h1>
             <p>Your One-Stop Shop for Quality Products</p>
         </div>
+
+        <?php
+            // Display user's name and role if available
+            if (isset($user['name']) && isset($user['role'])) {
+                echo "<p>Welcome, {$user['name']}! ({$user['role']})</p>";
+            }
+            ?>
     </header>
     <nav>
         <ul>

@@ -1,8 +1,15 @@
 <?php
 require 'connection.php';
 
+// Check if the user is not logged in
+if (!isset($_SESSION['id'])) {
+    // Redirect to the login page
+    header("Location: login.php");
+    exit();
+}
+
 // Check if the user is logged in and is an admin or shop manager
-session_start();  // Start the session
+//session_start();  // Start the session
 if (!isset($_SESSION['id']) || ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager')) {
     // If not logged in as admin or shop manager, redirect to login page
     header("Location: login.php");
@@ -40,8 +47,17 @@ if ($result && mysqli_num_rows($result) > 0) {
                     <th>Order ID</th>
                     <th>Customer</th>
                     <th>Phone</th>
-                    <th>Products</th>
+                    <th colspan="3">Products</th>
                     <th>Total</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th>Product1Qty</th>
+                    <th>Product2Qty</th>
+                    <th>Product3Qty</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -51,7 +67,9 @@ if ($result && mysqli_num_rows($result) > 0) {
                         <td><?php echo $order['name']; ?></td>
                         <td><?php echo $order['phone']; ?></td>
                         <td><?php echo $order['product1Qty']; ?></td>
-                        <td><?php echo $order['total_amount']; ?></td>
+                        <td><?php echo $order['product1Qty']; ?></td>
+                        <td><?php echo $order['product1Qty']; ?></td>
+                        <td><?php echo $order['total']; ?></td>
                         <!-- Add more details as necessary -->
                     </tr>
                 <?php endforeach; ?>
