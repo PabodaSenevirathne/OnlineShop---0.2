@@ -42,15 +42,7 @@ if ($result && mysqli_num_rows($result) > 0) {
     header("Location: login.php");
     exit();
 }
-
-
-header('Content-Type: application/json');
-echo json_encode(['receiptContent' => $receiptContent]);
-
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +51,6 @@ echo json_encode(['receiptContent' => $receiptContent]);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/reciept.css">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script type="text/javascript" src="js/receipt.js"></script>
     <title>Receipt</title>
 </head>
@@ -67,6 +58,8 @@ echo json_encode(['receiptContent' => $receiptContent]);
 <body>
     <!-- user details -->
     <h2>Receipt</h2>
+
+    <h2>User Details</h2>
     <p>Name: <?php echo $order['name']; ?></p>
     <p>Phone: <?php echo $order['phone']; ?></p>
     <p>Postcode: <?php echo $order['postcode']; ?></p>
@@ -77,11 +70,17 @@ echo json_encode(['receiptContent' => $receiptContent]);
     <p>Name On Card: <?php echo $order['cname']; ?></p>
     <p>Credit Card Number : <?php echo $order['ccnum']; ?></p>
     <p>Exp Month: <?php echo $order['expmonth']; ?></p>
+    <p>Name On Card: <?php echo $order['cname']; ?></p>
+    <h2>Cart Details</h2>
+    <p>Sneakers : <?php echo $order['product1Qty']; ?></p>
+    <p>Hiking boot: <?php echo $order['product2Qty']; ?></p>
+    <p>High Heels : <?php echo $order['product3Qty']; ?></p>
+    <h2>Total</h2>
     <p>salesTax: <?php echo $order['salesTax']; ?></p>
     <p>Total: <?php echo $order['total']; ?></p>
 
     <!-- Cart details -->
-    <h2>Cart Details</h2>
+    
     <ul>
     <!-- <?php
         // $total = 0;

@@ -44,10 +44,13 @@ else{
                 <a href="index.php">Home</a>
             </li>
             <li>
-                <a href="#">Proucts</a>
+                <a href="checkout.php">Buy Now</a>
             </li>
             <li>
                 <a href="orders.php">Orders</a>
+            </li>
+            <li>
+            <a href="create_shop_managers.php">Create</a>
             </li>
             <li>
                 <a href="#">About</a>
@@ -74,13 +77,9 @@ else{
                     </li>
                 </ul>
             </li>
-
-            <li>
-            <a href="create_shop_managers.php">Create</a>
-            </li>
-            <li>
+            <!-- <li>
                 <a href="shopping-cart.php">Cart</a>
-            </li>
+            </li> -->
             <li>
                 <a href="logout.php">Logout</a>
             </li>

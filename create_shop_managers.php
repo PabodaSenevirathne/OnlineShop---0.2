@@ -5,11 +5,30 @@ require 'connection.php';
 // }
 
 // Check if the user is logged in and is an admin
-if (!isset($_SESSION['id']) || $_SESSION['role'] !== 'admin') {
-    // If not logged in as admin, log out and redirect to login page
-    header("Location: logout.php");
+// if (!isset($_SESSION['id']) || $_SESSION['role'] !== 'admin') {
+//     // If not logged in as admin, log out and redirect to login page
+//     header("Location: logout.php");
+//     exit();
+// }
+
+
+// Check if the user is logged in
+if (!isset($_SESSION['id'])) {
+    // If not logged in, redirect to login page
+    header("Location: login.php");
     exit();
 }
+
+// Check if the logged-in user is an admin
+// You need to have a column in your user table to store the user's role, for example, 'role'
+if ($_SESSION['role'] !== 'admin') {
+    // If not an admin, log out and redirect to login page
+    session_unset();
+    session_destroy();
+    header("Location: login.php");
+    exit();
+}
+
 
 // If the user is a shop manager, you can set a variable to control form visibility
 $showCreateForm = ($_SESSION['role'] === 'admin');
@@ -49,16 +68,13 @@ var_dump($_SESSION);
                 <a href="index.php">Home</a>
             </li>
             <li>
-                <a href="#">Products</a>
+                <a href="checkout.php">Buy Now</a>
             </li>
             <li>
-                <a href="#">Locations</a>
+                <a href="orders.php">Orders</a>
             </li>
             <li>
-                <a href="#">Packages</a>
-            </li>
-            <li>
-                <a href="#">Training</a>
+            <a href="create_shop_managers.php">Create</a>
             </li>
             <li>
                 <a href="#">About</a>
@@ -85,8 +101,11 @@ var_dump($_SESSION);
                     </li>
                 </ul>
             </li>
-            <li>
+            <!-- <li>
                 <a href="shopping-cart.php">Cart</a>
+            </li> -->
+            <li>
+                <a href="logout.php">Logout</a>
             </li>
         </ul>
     </nav>

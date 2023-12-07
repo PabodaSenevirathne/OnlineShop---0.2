@@ -20,93 +20,6 @@ if (!isset($_SESSION['id'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <title>PBerlino</title>
-
-    <script>
-   
-
-//    function openPopupWindow() {
-//     console.log("Button clicked");
-
-//     // Create a relative URL
-//     const baseUrl = window.location.href.split('/').slice(0, -1).join('/');
-//     const relativeUrl = 'receipt.php';
-//     const apiUrl = `${baseUrl}/${relativeUrl}`;
-
-//     // Open a new popup and navigate to the receipt page
-//     const popup = window.open(apiUrl, '_blank', 'width=800,height=600');
-
-//     // Check if the popup was successfully opened
-//     if (popup) {
-//         console.log("Popup opened successfully");
-//     } else {
-//         console.error("Error opening popup");
-//     }
-// }
-
-// function openPopupWindow() {
-//     console.log("Button clicked");
-
-//     // Create a relative URL
-//     const baseUrl = window.location.href.split('/').slice(0, -1).join('/');
-//     const apiUrl = `${baseUrl}/receipt.php`;
-
-//     // Create an iframe
-//     const iframe = document.createElement('iframe');
-//     iframe.style.width = '600px';
-//     iframe.style.height = '400px';
-
-//     // Set the source of the iframe to the receipt API
-//     iframe.src = apiUrl;
-
-//     // Open a new popup and append the iframe to it
-//     const popup = window.open('', '_blank', 'width=600,height=400');
-//     popup.document.body.appendChild(iframe);
-// }
-
-function openPopupWindow() {
-    console.log("Button clicked");
-
-    // Create a relative URL
-    const baseUrl = window.location.href.split('/').slice(0, -1).join('/');
-    const apiUrl = `${baseUrl}/receipt.php`;
-
-    // Send a fetch request to fetch receipt content
-    fetch(apiUrl)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Error: ${response.status} - ${response.statusText}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log("Response received:", data);
-
-            // Create an iframe
-            const iframe = document.createElement('iframe');
-            iframe.style.width = '600px';
-            iframe.style.height = '400px';
-
-            // Set the content of the iframe
-            iframe.contentDocument.write(data.receiptContent);
-
-            // Open a new popup and append the iframe to it
-            const popup = window.open('', '_blank', 'width=600,height=400');
-            popup.document.body.appendChild(iframe);
-        })
-        .catch(error => {
-            console.error("Error fetching receipt:", error);
-        });
-}
-
-
-
-
-
-
-
-
-
-    </script>
 </head>
 
 <body>
@@ -129,16 +42,13 @@ function openPopupWindow() {
                 <a href="index.php">Home</a>
             </li>
             <li>
-                <a href="#">Products</a>
+                <a href="checkout.php">Buy Now</a>
             </li>
             <li>
-                <a href="#">Locations</a>
+                <a href="orders.php">Orders</a>
             </li>
             <li>
-                <a href="#">Packages</a>
-            </li>
-            <li>
-                <a href="#">Training</a>
+            <a href="create_shop_managers.php">Create</a>
             </li>
             <li>
                 <a href="#">About</a>
@@ -165,8 +75,11 @@ function openPopupWindow() {
                     </li>
                 </ul>
             </li>
-            <li>
+            <!-- <li>
                 <a href="shopping-cart.php">Cart</a>
+            </li> -->
+            <li>
+                <a href="logout.php">Logout</a>
             </li>
         </ul>
     </nav>
@@ -180,11 +93,11 @@ function openPopupWindow() {
         <p>Quantity: <input type="number" id="product1Qty" name ="product1Qty" value="0"></p></br>
         <br>
 
-        <label for="Mittens">Elements - $29.99 each:</label>
+        <label for="Mittens">Hiking boot - $29.99 each:</label>
         <p>Quantity: <input type="number" id="product2Qty" name ="product2Qty" value="0"></p></br>
         <br>
         
-        <label for="Door mat">Aldo - $19.99 each:</label>
+        <label for="Door mat">High Heels - $19.99 each:</label>
         <p>Quantity: <input type="number" id="product3Qty" name ="product3Qty" value="0"></p></br>
         <br>
        

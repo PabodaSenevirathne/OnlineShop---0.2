@@ -103,9 +103,9 @@ function saveData()
 
 
 
-  $product1Price = 10;  // Replace with the actual price for product 1
-  $product2Price = 15;  // Replace with the actual price for product 2
-  $product3Price = 20;  // Replace with the actual price for product 3
+  $product1Price = 8.99; 
+  $product2Price = 29.99;
+  $product3Price = 19.99;
 
   // Calculate subtotals for each product
   $subtotal1 = $product1Qty * $product1Price;
@@ -113,7 +113,7 @@ function saveData()
   $subtotal3 = $product3Qty * $product3Price;
 
   // Calculate total without tax
-  $totalWithoutTax = $subtotal1 + $subtotal2 + $subtotal3;
+  $totalWithoutTax = ($subtotal1 + $subtotal2 + $subtotal3);
 
 
   // Retrieve province from the form data
@@ -121,12 +121,12 @@ function saveData()
 
   // Calculate sales tax based on the province
   $taxRate = getSalesTaxRate($province);
-  $salesTax = $totalWithoutTax * $taxRate;
+  $salesTax = ($totalWithoutTax * $taxRate);
 
   // Calculate the final total with tax
-  $total = $totalWithoutTax + $salesTax;
+  $total = ($totalWithoutTax + $salesTax);
 
-  $query = "INSERT INTO orders VALUES('','$userId','$sessionId','$product1Qty','$product2Qty','$product3Qty','$name', '$phone', '$postcode', '$address','$city','$province','$email','$cname','$ccnum','$expmonth','$expyear', '$cvv','$password','$confirmPassword', '$total','$salesTax')";
+  $query = "INSERT INTO orders VALUES('','$userId','$sessionId','$product1Qty','$product2Qty','$product3Qty','$name', '$phone', '$postcode', '$address','$city','$province','$email','$cname','$ccnum','$expmonth','$expyear', '$cvv','$password','$confirmPassword','$salesTax','$total')";
 
   if (mysqli_query($conn, $query)) {
     echo "Data Save Successful";
