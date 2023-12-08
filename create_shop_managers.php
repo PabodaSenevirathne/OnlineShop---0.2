@@ -19,8 +19,6 @@ if ($_SESSION['role'] !== 'admin') {
 
 $showCreateForm = ($_SESSION['role'] === 'admin');
 
-var_dump($_SESSION);
-
 ?>
 
 <!DOCTYPE html>
