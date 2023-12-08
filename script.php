@@ -59,23 +59,21 @@
                 // Parse the JSON response
                 var responseData = JSON.parse(response);
 
-                // Handle the response
                 alert(responseData.message);
 
                 if (responseData.message == "Checkout Successful") {
                     // Update receipt with calculated values
                     updateReceipt(data, responseData.calculatedValues);
-                    //window.location.reload();
+
                 }
             }
         });
     });
   }
 
+  // Print the receipt
   function updateReceipt(data, calculatedValues) {
-  // // Calculate the total price
-  // const { totalPrice, salesTax, totalPriceWithTax } = calculateTotalPrice(data.product1Qty, data.product2Qty, data.product3Qty);
-  console.log('updateReceipt called');
+
   // Update the #receipt div receipt data
   const receiptDiv = document.getElementById('receipt');
   receiptDiv.innerHTML = `
@@ -101,46 +99,5 @@
     <p>Total Price with Tax: $${Math.round(calculatedValues.totalPriceWithTax)}</p>
   `;
 }
-
-// // Calculate total price
-//   function calculateTotalPrice(product1Qty, product2Qty, product3Qty) {
-
-//   const product1Price = 8.99; 
-//   const product2Price = 29.99;
-//   const product3Price = 19.99;
-
-//   // Subtotals for each product
-//   const subtotal1 = product1Qty * product1Price;
-//   const subtotal2 = product2Qty * product2Price;
-//   const subtotal3 = product3Qty * product3Price;
-
-//   // Total price without tax
-//   const totalWithoutTax = subtotal1 + subtotal2 + subtotal3;
-
-//   const province = $("#province").val();
-
-//   // Sales tax based on the province
-//   const taxRate = getSalesTaxRate(province);
-//   const salesTax = totalWithoutTax * taxRate;
-
-//   // Calculate the total with tax
-//   const totalPriceWithTax = totalWithoutTax + salesTax;
-
-//   return { totalPrice: totalWithoutTax, salesTax, totalPriceWithTax };
-// }
-
-// // Calculate sales tax based on the province
-// function getSalesTaxRate(province) {
-//   const taxRates = {
-//     'Ontario': 0.13,
-//     'Quebec': 0.15,
-//     'British Columbia': 0.12,
-//     'Alberta': 0.05,
-//     'Manitoba': 0.08,
-//     'Quebec': 0.09975,
-//   };
-
-//   return taxRates[province] || 0;
-// }
 
 </script>

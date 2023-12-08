@@ -96,48 +96,21 @@ function saveData()
   $password = $_POST["password"];
   $confirmPassword = $_POST["confirmPassword"];
 
-  // if (empty($name) || empty($phone) || empty($postcode) || empty($address)|| empty($address) || empty($province) || empty($email)) {
-  //   echo "Please Fill Out The Form!";
-  //   exit;
-  // }
+  if (empty($name) || empty($phone) || empty($postcode) || empty($address)|| empty($address) || empty($province) || empty($email)) {
+    echo "Please Fill Out The Form!";
+    exit;
+  }
 
   // Calculate total price
   $calculatedValues = calculateTotalPrice($product1Qty, $product2Qty, $product3Qty);
-  // $product1Price = 8.99; 
-  // $product2Price = 29.99;
-  // $product3Price = 19.99;
 
-  // // Calculate subtotals for each product
-  // $subtotal1 = $product1Qty * $product1Price;
-  // $subtotal2 = $product2Qty * $product2Price;
-  // $subtotal3 = $product3Qty * $product3Price;
-
-  // // Calculate total without tax
-  // $totalWithoutTax = ($subtotal1 + $subtotal2 + $subtotal3);
-
-  // // Retrieve province from the form data
-  // $province = $_POST["province"];
-
-  // // Calculate sales tax based on the province
-  // $taxRate = getSalesTaxRate($province);
-  // $salesTax = ($totalWithoutTax * $taxRate);
-
-  // // Calculate the final total with tax
-  // $total = ($totalWithoutTax + $salesTax);
-
-  //insert to the database
+  //insert data to the database
   $query = "INSERT INTO orders VALUES('','$userId','$sessionId','$product1Qty','$product2Qty','$product3Qty','$name', '$phone', '$postcode', '$address','$city','$province','$email','$cname','$ccnum','$expmonth','$expyear', '$cvv','$password','$confirmPassword','{$calculatedValues['salesTax']}', '{$calculatedValues['totalPriceWithTax']}')";
 
-  // if (mysqli_query($conn, $query)) {
-  //   echo "Data Save Successful";
-  // } else {
-  //   echo "Error: " . $query . "<br>" . mysqli_error($conn);
-  // }
-
   if (mysqli_query($conn, $query)) {
-    // Return success message along with calculated values
+    // Return calculated values
     echo json_encode([
-        'message' => 'Checkout Successful',
+        'message' => 'Data Save Successful',
         'calculatedValues' => $calculatedValues,
     ]);
 } else {
@@ -151,7 +124,6 @@ function saveData()
 // Calculate total price
 function calculateTotalPrice($product1Qty, $product2Qty, $product3Qty)
 {
-    // Replace this with your actual pricing logic
     $product1Price = 8.99;
     $product2Price = 29.99;
     $product3Price = 19.99;
@@ -161,17 +133,17 @@ function calculateTotalPrice($product1Qty, $product2Qty, $product3Qty)
     $subtotal2 = $product2Qty * $product2Price;
     $subtotal3 = $product3Qty * $product3Price;
 
-    // Calculate total without tax
+    // Calculate total price without tax
     $totalWithoutTax = $subtotal1 + $subtotal2 + $subtotal3;
 
-    // Retrieve province from the form data (add error checking if needed)
+    // Retrieve province
     $province = $_POST['province'];
 
     // Calculate sales tax based on the province
     $taxRate = getSalesTaxRate($province);
     $salesTax = $totalWithoutTax * $taxRate;
 
-    // Calculate the final total with tax
+    // Calculate the final price with tax
     $totalPriceWithTax = $totalWithoutTax + $salesTax;
 
     return [
