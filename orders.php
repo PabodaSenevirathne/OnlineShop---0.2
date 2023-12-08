@@ -1,23 +1,7 @@
 <?php
 require 'connection.php';
 
-// Check if the user is not logged in
-// if (!isset($_SESSION['id'])) {
-//     // Redirect to the login page
-//     header("Location: login.php");
-//     exit();
-// }
-
-// Check if the user is logged in and is an admin or shop manager
-//session_start();  // Start the session
-// if (!isset($_SESSION['id']) || ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager')) {
-//     // If not logged in as admin or shop manager, redirect to login page
-//     header("Location: login.php");
-//     exit();
-// }
-
-
-// Check if the user is logged in
+// Check if the user logged in or not
 if (!isset($_SESSION['id'])) {
     // If not logged in, redirect to login page
     header("Location: login.php");
@@ -25,7 +9,6 @@ if (!isset($_SESSION['id'])) {
 }
 
 // Check if the logged-in user is an admin or shop manager
-// You need to have a column in your user table to store the user's role, for example, 'role'
 if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager') {
     // If not an admin or shop manager, log out and redirect to login page
     session_unset();
@@ -34,19 +17,18 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['role'] !== 'manager') {
     exit();
 }
 
-
-// Fetch all orders from the database
+// Fetch all orders
 $query = "SELECT * FROM orders";
 $result = mysqli_query($conn, $query);
 
-// Check if there are orders
 if ($result && mysqli_num_rows($result) > 0) {
     $orders = mysqli_fetch_all($result, MYSQLI_ASSOC);
 } else {
-    // No orders found
+
     $orders = [];
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,7 +49,7 @@ if ($result && mysqli_num_rows($result) > 0) {
         </div>
 
         <?php
-            // Display user's name and role if available
+            // Display user's name and role
             if (isset($user['name']) && isset($user['role'])) {
                 echo "<p>Welcome, {$user['name']}! ({$user['role']})</p>";
             }
@@ -112,9 +94,6 @@ if ($result && mysqli_num_rows($result) > 0) {
                     </li>
                 </ul>
             </li>
-            <!-- <li>
-                <a href="shopping-cart.php">Cart</a>
-            </li> -->
             <li>
                 <a href="logout.php">Logout</a>
             </li>
@@ -134,8 +113,8 @@ if ($result && mysqli_num_rows($result) > 0) {
                     <th>City</th>
                     <th>Province</th>
                     <th colspan="3">Products(Qty)</th>
-                    <th>SalesTax</th>
-                    <th>Total</th>
+                    <th>SalesTax($)</th>
+                    <th>Total($)</th>
                 </tr>
                 <tr>
                     <th></th>
@@ -167,7 +146,6 @@ if ($result && mysqli_num_rows($result) > 0) {
                         <td><?php echo $order['product1Qty']; ?></td>
                         <td><?php echo $order['salesTax']; ?></td>
                         <td><?php echo $order['total']; ?></td>
-                        <!-- Add more details as necessary -->
                     </tr>
                 <?php endforeach; ?>
             </tbody>

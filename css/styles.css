@@ -445,14 +445,13 @@ table, th, td {
     padding: 0;
 }
 
-/* Style for the order table */
+/* order table */
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
 }
 
-/* Style for table headers */
 th, td {
     border: 1px solid #ddd;
     padding: 8px;

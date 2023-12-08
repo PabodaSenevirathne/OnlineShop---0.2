@@ -1,7 +1,7 @@
 <?php
 require 'connection.php';
 
-// Check if the user is not logged in
+// Check if the user logged in or not
 if (!isset($_SESSION['id'])) {
     // Redirect to the login page
     header("Location: login.php");
@@ -48,7 +48,7 @@ if (!isset($_SESSION['id'])) {
                 <a href="orders.php">Orders</a>
             </li>
             <li>
-            <a href="create_shop_managers.php">Create</a>
+                <a href="create_shop_managers.php">Create</a>
             </li>
             <li>
                 <a href="#">About</a>
@@ -75,9 +75,6 @@ if (!isset($_SESSION['id'])) {
                     </li>
                 </ul>
             </li>
-            <!-- <li>
-                <a href="shopping-cart.php">Cart</a>
-            </li> -->
             <li>
                 <a href="logout.php">Logout</a>
             </li>
@@ -86,21 +83,21 @@ if (!isset($_SESSION['id'])) {
     <h2>Checkout Details</h2>
     <form method="post" action="">
         <input type="hidden" id="action" value="checkout">
-        
+
         <h2>Product Details</h2><br>
 
         <label for="Pen holder">Sneakers - $8.99 each:</label>
-        <p>Quantity: <input type="number" id="product1Qty" name ="product1Qty" value="0"></p></br>
+        <p>Quantity: <input type="number" id="product1Qty" name="product1Qty" value="0"></p></br>
         <br>
 
         <label for="Mittens">Hiking boot - $29.99 each:</label>
-        <p>Quantity: <input type="number" id="product2Qty" name ="product2Qty" value="0"></p></br>
+        <p>Quantity: <input type="number" id="product2Qty" name="product2Qty" value="0"></p></br>
         <br>
-        
+
         <label for="Door mat">High Heels - $19.99 each:</label>
-        <p>Quantity: <input type="number" id="product3Qty" name ="product3Qty" value="0"></p></br>
+        <p>Quantity: <input type="number" id="product3Qty" name="product3Qty" value="0"></p></br>
         <br>
-       
+
 
         <h2>Customer Details</h2><br>
 
@@ -188,7 +185,6 @@ if (!isset($_SESSION['id'])) {
         </div>
         <br><br>
         <button type="button" id="checkoutButton" onclick="saveFormData()">Proceed to Checkout</button>
-        <button id="printReceipt" onclick="openPopupWindow()">Print</button> <br><br>
 
     </form>
     <div id="receipt"></div>

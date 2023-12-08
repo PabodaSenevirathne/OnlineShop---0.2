@@ -3,7 +3,7 @@ session_start();
 $conn = mysqli_connect("localhost", "root", "", "store");
 
 
-// IF
+// check action
 if (isset($_POST["action"])) {
   if ($_POST["action"] == "register") {
     register();
@@ -14,7 +14,7 @@ if (isset($_POST["action"])) {
   }
 }
 
-// REGISTER
+// register shop managers
 function register()
 {
   global $conn;
@@ -40,7 +40,7 @@ function register()
   echo "Registration Successful";
 }
 
-// LOGIN
+// login
 function login()
 {
   global $conn;
@@ -69,13 +69,14 @@ function login()
   }
 }
 
-// Save checkoutData
+// Save checkout data
 function saveData()
 {
   global $conn;
 
   $userId = $_POST["userId"];
-  $sessionId = session_id();  // Retrieve the current session ID
+  // get the current session ID
+  $sessionId = session_id();  
   //Retrieve form data
   $product1Qty = $_POST['product1Qty'];
   $product2Qty = $_POST['product2Qty'];
@@ -95,13 +96,10 @@ function saveData()
   $password = $_POST["password"];
   $confirmPassword = $_POST["confirmPassword"];
 
-  if (empty($name) || empty($phone) || empty($postcode) || empty($address)) {
+  if (empty($name) || empty($phone) || empty($postcode) || empty($address)|| empty($address) || empty($province) || empty($email)) {
     echo "Please Fill Out The Form!";
     exit;
   }
-
-
-
 
   $product1Price = 8.99; 
   $product2Price = 29.99;
@@ -115,7 +113,6 @@ function saveData()
   // Calculate total without tax
   $totalWithoutTax = ($subtotal1 + $subtotal2 + $subtotal3);
 
-
   // Retrieve province from the form data
   $province = $_POST["province"];
 
@@ -126,6 +123,7 @@ function saveData()
   // Calculate the final total with tax
   $total = ($totalWithoutTax + $salesTax);
 
+  //insert to the database
   $query = "INSERT INTO orders VALUES('','$userId','$sessionId','$product1Qty','$product2Qty','$product3Qty','$name', '$phone', '$postcode', '$address','$city','$province','$email','$cname','$ccnum','$expmonth','$expyear', '$cvv','$password','$confirmPassword','$salesTax','$total')";
 
   if (mysqli_query($conn, $query)) {
@@ -135,15 +133,15 @@ function saveData()
   }
 
   // Close the database connection
-  // mysqli_close($conn);
+  mysqli_close($conn);
 }
 
 
 
-
+// calculate tax rates for each province
 function getSalesTaxRate($province)
 {
-  // Tax rates for each province
+
   $taxRates = [
     'Alberta' => 0.05,
     'British Columbia' => 0.07,

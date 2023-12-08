@@ -1,26 +1,14 @@
 <?php
 require 'connection.php';
-// if(isset($_SESSION["id"])){
-//   header("Location: index.php");
-// }
 
-// Check if the user is logged in and is an admin
-// if (!isset($_SESSION['id']) || $_SESSION['role'] !== 'admin') {
-//     // If not logged in as admin, log out and redirect to login page
-//     header("Location: logout.php");
-//     exit();
-// }
-
-
-// Check if the user is logged in
+// Check if the user logged in or not
 if (!isset($_SESSION['id'])) {
-    // If not logged in, redirect to login page
+    // If yes, redirect to login page
     header("Location: login.php");
     exit();
 }
 
-// Check if the logged-in user is an admin
-// You need to have a column in your user table to store the user's role, for example, 'role'
+// Check if the logged user is an admin or not
 if ($_SESSION['role'] !== 'admin') {
     // If not an admin, log out and redirect to login page
     session_unset();
@@ -29,14 +17,11 @@ if ($_SESSION['role'] !== 'admin') {
     exit();
 }
 
-
-// If the user is a shop manager, you can set a variable to control form visibility
 $showCreateForm = ($_SESSION['role'] === 'admin');
 
 var_dump($_SESSION);
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -101,9 +86,6 @@ var_dump($_SESSION);
                     </li>
                 </ul>
             </li>
-            <!-- <li>
-                <a href="shopping-cart.php">Cart</a>
-            </li> -->
             <li>
                 <a href="logout.php">Logout</a>
             </li>

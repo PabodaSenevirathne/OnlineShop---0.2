@@ -1,5 +1,6 @@
 <?php
 require 'connection.php';
+
 if(isset($_SESSION["id"])){
   $id = $_SESSION["id"];
   $user = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM user WHERE id = $id"));
@@ -32,7 +33,7 @@ else{
         </div>
 
         <?php
-            // Display user's name and role if available
+            // Display user's name and role
             if (isset($user['name']) && isset($user['role'])) {
                 echo "<p>Welcome, {$user['name']}! ({$user['role']})</p>";
             }
@@ -77,9 +78,6 @@ else{
                     </li>
                 </ul>
             </li>
-            <!-- <li>
-                <a href="shopping-cart.php">Cart</a>
-            </li> -->
             <li>
                 <a href="logout.php">Logout</a>
             </li>

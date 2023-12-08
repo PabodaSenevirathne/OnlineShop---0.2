@@ -25,7 +25,6 @@
     });
   }
 
-
   function saveFormData() {
     $(document).ready(function() {
       var userId = <?php echo isset($_SESSION["id"]) ? $_SESSION["id"] : 'null'; ?>;
@@ -68,10 +67,10 @@
   }
 
   function updateReceipt(data) {
-  // Calculate the total price including sales tax
+  // Calculate the total price
   const { totalPrice, salesTax, totalPriceWithTax } = calculateTotalPrice(data.product1Qty, data.product2Qty, data.product3Qty);
 
-  // Update the #receipt div with the received data
+  // Update the #receipt div receipt data
   const receiptDiv = document.getElementById('receipt');
   receiptDiv.innerHTML = `
     <h2>Receipt</h2>
@@ -91,44 +90,41 @@
     <p>Hiking boot($29.99): ${data.product2Qty}</p>
     <p>High Heels($19.99) : ${data.product3Qty}</p>
     <h2>Total</h2>
-    <p>Total Price: $${totalPrice.toFixed(2)}</p>
-    <p>Sales Tax: $${salesTax.toFixed(2)}</p>
-    <p>Total Price with Tax: $${totalPriceWithTax.toFixed(2)}</p>
+    <p>Total Price: $${Math.floor(totalPrice)}</p>
+    <p>Sales Tax: $${Math.floor(salesTax)}</p>
+    <p>Total Price with Tax: $${Math.floor(totalPriceWithTax)}</p>
   `;
 }
 
-
-
+// Calculate total price
   function calculateTotalPrice(product1Qty, product2Qty, product3Qty) {
-  // Replace this with your actual pricing logic
+
   const product1Price = 8.99; 
   const product2Price = 29.99;
   const product3Price = 19.99;
 
-  // Calculate subtotals for each product
+  // Subtotals for each product
   const subtotal1 = product1Qty * product1Price;
   const subtotal2 = product2Qty * product2Price;
   const subtotal3 = product3Qty * product3Price;
 
-  // Calculate total without tax
+  // Total price without tax
   const totalWithoutTax = subtotal1 + subtotal2 + subtotal3;
 
-  // Retrieve province from the form data
   const province = $("#province").val();
 
-  // Calculate sales tax based on the province
+  // Sales tax based on the province
   const taxRate = getSalesTaxRate(province);
   const salesTax = totalWithoutTax * taxRate;
 
-  // Calculate the final total with tax
+  // Calculate the total with tax
   const totalPriceWithTax = totalWithoutTax + salesTax;
 
   return { totalPrice: totalWithoutTax, salesTax, totalPriceWithTax };
 }
 
+// Calculate sales tax based on the province
 function getSalesTaxRate(province) {
-  // Replace this with your actual logic to get sales tax rate based on the province
-  // Example rates, you should have your own rates for each province
   const taxRates = {
     'Ontario': 0.13,
     'Quebec': 0.15,
@@ -136,10 +132,9 @@ function getSalesTaxRate(province) {
     'Alberta': 0.05,
     'Manitoba': 0.08,
     'Quebec': 0.09975,
-    // Add more provinces and rates as needed
   };
 
-  return taxRates[province] || 0; // Default to 0 if province not found
+  return taxRates[province] || 0;
 }
 
 </script>
