@@ -191,6 +191,7 @@ if (!isset($_SESSION['id'])) {
         <button id="printReceipt" onclick="openPopupWindow()">Print</button> <br><br>
 
     </form>
+    <div id="receipt"></div>
     <?php require 'script.php'; ?>
     <p id="demo"></p>
 

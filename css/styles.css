@@ -464,3 +464,38 @@ th {
     color: white;
 }
 
+#receipt {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center; 
+}
+
+#receipt h3 {
+    color: #333;
+}
+
+#receipt p {
+    margin: 10px 0;
+    color: #555;
+}
+
+#receipt h2 {
+    margin-top: 20px;
+    color: #333;
+}
+
+#receipt p.total {
+    font-weight: bold;
+    color: #000;
+}
+
+#receipt p.error {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
