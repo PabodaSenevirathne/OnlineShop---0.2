@@ -58,10 +58,11 @@
             success: function(response) {
                 // Parse the JSON response
                 var responseData = JSON.parse(response);
+                console.log(responseData)
 
                 alert(responseData.message);
 
-                if (responseData.message == "Checkout Successful") {
+                if (responseData.message == "Data Save Successful") {
                     // Update receipt with calculated values
                     updateReceipt(data, responseData.calculatedValues);
 
