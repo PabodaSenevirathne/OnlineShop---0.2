@@ -142,8 +142,8 @@ if ($result && mysqli_num_rows($result) > 0) {
                         <td><?php echo $order['city']; ?></td>
                         <td><?php echo $order['province']; ?></td>
                         <td><?php echo $order['product1Qty']; ?></td>
-                        <td><?php echo $order['product1Qty']; ?></td>
-                        <td><?php echo $order['product1Qty']; ?></td>
+                        <td><?php echo $order['product2Qty']; ?></td>
+                        <td><?php echo $order['product3Qty']; ?></td>
                         <td><?php echo $order['salesTax']; ?></td>
                         <td><?php echo $order['total']; ?></td>
                     </tr>

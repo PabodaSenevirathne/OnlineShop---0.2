@@ -96,10 +96,10 @@ function saveData()
   $password = $_POST["password"];
   $confirmPassword = $_POST["confirmPassword"];
 
-  // if (empty($name) || empty($phone) || empty($postcode) || empty($address)|| empty($address) || empty($province) || empty($email)) {
-  //   echo "Please Fill Out The Form!";
-  //   exit;
-  // }
+  if (empty($name) || empty($phone) || empty($postcode) || empty($address)|| empty($address) || empty($province) || empty($email)) {
+    echo "Please Fill Out The Form!";
+    exit;
+  }
 
   // Calculate total price
   $calculatedValues = calculateTotalPrice($product1Qty, $product2Qty, $product3Qty);
