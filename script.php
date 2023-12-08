@@ -90,9 +90,9 @@
     <p>Hiking boot($29.99): ${data.product2Qty}</p>
     <p>High Heels($19.99) : ${data.product3Qty}</p>
     <h2>Total</h2>
-    <p>Total Price: $${Math.floor(totalPrice)}</p>
-    <p>Sales Tax: $${Math.floor(salesTax)}</p>
-    <p>Total Price with Tax: $${Math.floor(totalPriceWithTax)}</p>
+    <p>Total Price: $${Math.round(totalPrice)}</p>
+    <p>Sales Tax: $${Math.round(salesTax)}</p>
+    <p>Total Price with Tax: $${Math.round(totalPriceWithTax)}</p>
   `;
 }
 
